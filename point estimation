@@ -1,0 +1,34 @@
+#1.my mean function
+my.mean <- function(x){
+  s <- sum(x)
+  m <- s/length(x)
+  return(m)
+}
+my.mean(c(1:10))
+
+#2.3.Making random values using binomial distribution
+r <- rbinom(100000,1000*pi,0.1)
+str(r)
+hist(r)
+my.mean(r)
+
+#4.5.Caliculating the means of the initial n elements in r
+means <- rep(0,length(r))
+for (i in 1:length(r)) {
+  means[i] <- my.mean(r[1:i])
+}
+str(means)
+plot(means,type="line")
+plot(means[1:500],type="line")
+
+#6.
+r.m <- matrix(0,100000,10)
+for (i in 1:10) {
+  r <- sample(r,replace = F)
+  means <- rep(0,100000)
+  for (j in 1:100000) {
+   means[j] <- mean(r[1:j]) 
+  }
+  r.m[,i] <- means
+}
+matplot(r.m[1:500,],type="l")
